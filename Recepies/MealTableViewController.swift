@@ -10,8 +10,11 @@ import UIKit
 
 class MealTableViewController: UITableViewController {
 
+    var meals = [Meal]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadSampleMeals()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,10 +32,30 @@ class MealTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return meals.count
     }
 
-    /*
+    private func loadSampleMeals() {
+
+        let emoji1 = "🍪"
+        let emoji2 = "🍩"
+        let emoji3 = "🍫"
+
+        guard let meal1 = Meal(name: "Cookie", emoji: emoji1) else {
+            fatalError("Unable to instantiate meal1")
+        }
+
+        guard let meal2 = Meal(name: "Donut", emoji: emoji2) else {
+            fatalError("Unable to instantiate meal2")
+        }
+
+        guard let meal3 = Meal(name: "Chocolate", emoji: emoji3) else {
+            fatalError("Unable to instantiate meal2")
+        }
+
+        meals += [meal1, meal2, meal3]
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
@@ -40,7 +63,6 @@ class MealTableViewController: UITableViewController {
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
