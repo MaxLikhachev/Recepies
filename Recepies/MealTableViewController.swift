@@ -14,8 +14,10 @@ class MealTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSampleMeals()
+        initDefaults()
+        loadMeals()
     }
+
 
     // MARK: - Table view data source
 
@@ -29,25 +31,51 @@ class MealTableViewController: UITableViewController {
         return meals.count
     }
 
-    private func loadSampleMeals() {
+    private func initDefaults() {
 
+        guard let meal1 = Meal(name: "Cookie", emoji: "🍪", recepie: "Cookie recepie") else {
+            fatalError("Unable to instantiate meal1")
+        }
+
+        guard let meal2 = Meal(name: "Donut", emoji: "🍩", recepie: "Donut recepie") else {
+            fatalError("Unable to instantiate meal2")
+        }
+
+        guard let meal3 = Meal(name: "Chocolate", emoji: "🍫", recepie: "Chocolate recepie") else {
+            fatalError("Unable to instantiate meal2")
+        }
+
+        let arr: [Meal] = [meal1, meal2, meal3]
+
+        UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: arr as [Meal]), forKey: "meal")
+        UserDefaults.standard.synchronize()
+    }
+
+    private func loadMeals() {
+        /*
         let emoji1 = "🍪"
         let emoji2 = "🍩"
         let emoji3 = "🍫"
 
-        guard let meal1 = Meal(name: "Cookie", emoji: emoji1) else {
+        guard let meal1 = Meal(name: "Cookie", emoji: emoji1, recepie: "Cookie recepie") else {
             fatalError("Unable to instantiate meal1")
         }
 
-        guard let meal2 = Meal(name: "Donut", emoji: emoji2) else {
+        guard let meal2 = Meal(name: "Donut", emoji: emoji2, recepie: "Donut recepie") else {
             fatalError("Unable to instantiate meal2")
         }
 
-        guard let meal3 = Meal(name: "Chocolate", emoji: emoji3) else {
+        guard let meal3 = Meal(name: "Chocolate", emoji: emoji3, recepie: "Chocolate recepie") else {
             fatalError("Unable to instantiate meal2")
         }
 
         meals += [meal1, meal2, meal3]
+
+        */
+
+        let newData: NSData = UserDefaults.standard.object(forKey: "meal") as! NSData
+        let newArr: Array = NSKeyedUnarchiver.unarchiveObject(with: newData as Data) as! [Meal]
+        meals += newArr
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,14 +129,33 @@ class MealTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        switch(segue.identifier ?? "") {
+            case "ShowDetail":
+            guard let mealDetailViewController = segue.destination as? MealViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+
+            guard let selectedMealCell = sender as? MealTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+
+            guard let indexPath = tableView.indexPath(for: selectedMealCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+
+            let selectedMeal = meals[indexPath.row]
+            mealDetailViewController.meal = selectedMeal
+
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+        }
     }
-    */
+
 
 }

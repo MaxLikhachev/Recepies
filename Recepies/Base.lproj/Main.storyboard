@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Meal Table View Controller-->
+        <!--Recepies-->
         <scene sceneID="NA3-fw-BKa">
             <objects>
                 <tableViewController id="0we-xS-5jo" customClass="MealTableViewController" customModule="Recepies" sceneMemberID="viewController">
@@ -17,20 +17,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MealTableViewCell" id="aZ5-XN-c3j" customClass="MealTableViewCell" customModule="Recepies" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="42.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aZ5-XN-c3j" id="vu8-6t-kSV">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="42.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9JP-td-jP3">
-                                            <rect key="frame" x="62" y="11.000000000000002" width="332" height="21.666666666666671"/>
+                                            <rect key="frame" x="62" y="11.000000000000002" width="332" height="20.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bT-sp-ich">
-                                            <rect key="frame" x="20" y="11.000000000000002" width="23" height="21.666666666666671"/>
+                                            <rect key="frame" x="20" y="11.000000000000002" width="23" height="20.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -54,6 +54,7 @@
                                 <connections>
                                     <outlet property="emojiLabel" destination="1bT-sp-ich" id="5HX-Ed-GDq"/>
                                     <outlet property="nameLabel" destination="9JP-td-jP3" id="vGg-lp-Mer"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="0WA-DD-w8r"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -62,7 +63,7 @@
                             <outlet property="delegate" destination="0we-xS-5jo" id="Gkb-BC-PvD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="SJM-RE-ALb"/>
+                    <navigationItem key="navigationItem" title="Recepies" id="SJM-RE-ALb"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mvd-hr-QvD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -77,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upO-6f-YKF">
-                                <rect key="frame" x="144" y="44" width="117.33333333333331" height="28.666666666666671"/>
+                                <rect key="frame" x="144" y="88" width="117.33333333333331" height="28.666666666666671"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -92,7 +93,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍽" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lM-ql-bcU">
-                                <rect key="frame" x="144" y="80.333333333333314" width="117.33333333333331" height="115"/>
+                                <rect key="frame" x="144" y="124.33333333333331" width="117.33333333333331" height="115"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="96"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -108,6 +109,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="nUI-v5-2Aw"/>
+                    <connections>
+                        <outlet property="mealEmoji" destination="0lM-ql-bcU" id="nok-Nk-gBU"/>
+                        <outlet property="mealName" destination="upO-6f-YKF" id="jvw-u0-1Uo"/>
+                        <outlet property="mealRecepie" destination="LHr-Xg-9uC" id="QCs-kK-wK0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
